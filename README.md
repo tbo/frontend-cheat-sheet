@@ -2,6 +2,20 @@
 
 ## Git
 
+Generate SSH key:
+```console
+ssh-keygen -t rsa
+```
+Copy public key into clipboard (for bitbucket):
+```console
+pbcopy < ~/.ssh/id_rsa.pub
+```
+Initial git setup:
+```console
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+git config push.default simple
+```
 Pull changes from the remote repository:
 ```console
 git pull
@@ -10,9 +24,9 @@ Change to a different branch (e.g. master):
 ```console
 git checkout master
 ```
-Create feature branch and change to it:
+Create feature branch and change into it:
 ```console
-git checkout -b features/SPH-42-Name_of_ticket
+git checkout -b feature/SPH-42-Name_of_ticket
 ```
 Get the names of all branches. The active one is highlighted:
 ```console
@@ -56,7 +70,7 @@ const addOne = (a) => a + 1;
 const addOne = a => (a + 1);
 const addOne = a => a + 1;
 ```
-Functions can return as well:
+Functions can return other functions as well:
 ```js
 function add(a) {
   return function (b) {
@@ -114,7 +128,7 @@ displayPerson(person);
 ```js
 const nums = [1, 2, 3];
 const abcs = ['a', 'b', 'c'];
-const alphanum = ['x', ...nums, ...abs ]; // ['x', 1, 2, 3, 'a', 'b', 'c']
+const alphanum = ['x', ...nums, ...abcs ]; // ['x', 1, 2, 3, 'a', 'b', 'c']
 ```
 ### Mapping
 ```js
@@ -270,7 +284,7 @@ interface Product {
 interface ProductTileProps {
   product: Product;
   quantity: number;
-  sale?: boolean;
+  sale?: boolean; // "?" means, that "sale" is optional
 }
 
 const formatPrice = (price: number): string =>
@@ -319,9 +333,9 @@ interface Product {
 
 const ProductItem = ({name, image, price}: Product) => (
   <div>
-    <h1>{productName}</h1>
-    <img src={props.product.image} alt={productName}/>
-    <div>{formatPrice(props.product.price)}</div>
+    <h1>{name}</h1>
+    <img src={image} alt={name}/>
+    <div>{formatPrice(price)}</div>
   </div>
 );
 
@@ -335,7 +349,7 @@ const ProductList = (props: {products: Product[]}) => {
     <div>
       <h1>Cheap Product List</h1>
       <div>Number of products: {props.products.length}</div>
-      {productList.map(product => <ProductItem product={product}/>}
+      {productList.map(product => <ProductItem {...product}/>}
     </div>
   )
 };
@@ -358,7 +372,7 @@ const GenericComponent = () => (
 
 ### Styled Components
 ```ts
-import {styled} from 'styles'
+import styled from '@emotion/styled';
 
 const Button = styled.button`
   color: red;
@@ -370,7 +384,7 @@ Usage:
 ```
 #### Passing props
 ```jsx
-import {styled} from 'styles'
+import styled from '@emotion/styled';
 
 interface ButtonProps {
   primary?: boolean;
